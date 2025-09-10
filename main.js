@@ -56,9 +56,11 @@ app.listen(PORT, () => {
 })
 
 function encode(s) {
-  return AES.encrypt(s, '111sigewinne').toString()
+  return s
+  //   return AES.encrypt(s, '111sigewinne').toString()
 }
 
 function decode(s) {
-  return AES.decrypt(s, '111sigewinne').toString(enc.Utf8)
+  return s
+  //   return AES.decrypt(s, '111sigewinne').toString(enc.Utf8)
 }
