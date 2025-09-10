@@ -41,9 +41,7 @@ app.post('/paste', (req, res) => {
 
 // 获取粘贴内容
 app.get('/:id', (req, res) => {
-  console.log('xx', 'getid', req.params.id)
   const paste = pastes.get(req.params.id)
-  console.log('xx', 'paste', paste)
   if (!paste) {
     return res.status(404).send('Paste not found')
   }
