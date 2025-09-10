@@ -15,6 +15,7 @@ app.use((req, res, next) => {
 })
 
 // 中间件
+app.use(bodyParser.json())
 app.use(express.static('public'))
 
 // 生成随机ID
@@ -24,7 +25,6 @@ function generateId() {
 
 // 提交新粘贴
 app.post('/paste', (req, res) => {
-  console.log(req, req.body, req.params)
   const content = JSON.parse(req.body).text // decode(req.body)
   if (!content || typeof content !== 'string') {
     return res.status(400).send('Invalid content')
