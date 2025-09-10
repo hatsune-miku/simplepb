@@ -25,7 +25,7 @@ function generateId() {
 
 // 提交新粘贴
 app.post('/paste', (req, res) => {
-  const content = JSON.parse(req.body).text // decode(req.body)
+  const content = req.body.text // decode(req.body)
   if (!content || typeof content !== 'string') {
     return res.status(400).send('Invalid content')
   }
