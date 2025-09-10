@@ -45,6 +45,9 @@ app.get('/:id', (req, res) => {
   if (!paste) {
     return res.status(404).send('Paste not found')
   }
+  if (paste.burnAfterRead) {
+    pastes.delete(req.params.id)
+  }
 
   res.json({ text: encode(paste.content) })
 })
