@@ -34,6 +34,7 @@ app.post('/paste', (req, res) => {
   pastes.set(id, {
     content: content,
     createdAt: new Date(),
+    burnAfterRead: req.body.burnAfterRead,
   })
 
   res.send({ id })
@@ -43,7 +44,7 @@ app.post('/paste', (req, res) => {
 app.get('/:id', (req, res) => {
   const paste = pastes.get(req.params.id)
   if (!paste) {
-    return res.status(404).send('Paste not found')
+    return res.json({ text: '404 - 数据不存在' })
   }
   if (paste.burnAfterRead) {
     pastes.delete(req.params.id)
