@@ -6,6 +6,13 @@ const app = express()
 // 内存存储粘贴内容
 const pastes = new Map()
 
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*')
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE')
+  res.header('Access-Control-Allow-Headers', 'Content-Type')
+  next()
+})
+
 // 中间件
 app.use(bodyParser.text())
 app.use(express.static('public'))
