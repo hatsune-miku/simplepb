@@ -34,6 +34,7 @@ app.post('/paste', (req, res) => {
   pastes.set(id, {
     content: content,
     createdAt: new Date(),
+    burnAfterRead: req.body.burnAfterRead,
   })
 
   res.send({ id })
