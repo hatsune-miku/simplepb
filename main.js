@@ -15,7 +15,6 @@ app.use((req, res, next) => {
 })
 
 // 中间件
-app.use(bodyParser.text())
 app.use(express.static('public'))
 
 // 生成随机ID
