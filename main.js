@@ -25,7 +25,7 @@ function generateId() {
 
 // 提交新粘贴
 app.post('/paste', (req, res) => {
-  const content = req.body // decode(req.body)
+  const content = JSON.parse(req.body).text // decode(req.body)
   if (!content || typeof content !== 'string') {
     return res.status(400).send('Invalid content')
   }
@@ -46,7 +46,7 @@ app.get('/:id', (req, res) => {
     return res.status(404).send('Paste not found')
   }
 
-  res.type('text').send(encode(paste.content))
+  res.json({ text: encode(paste.content) })
 })
 
 // 启动服务器
