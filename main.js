@@ -1,6 +1,7 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const crypto = require('crypto')
+const { AES, enc } = require('crypto-js')
 const app = express()
 
 // 内存存储粘贴内容
@@ -24,7 +25,7 @@ function generateId() {
 
 // 提交新粘贴
 app.post('/paste', (req, res) => {
-  const content = req.body
+  const content = decode(req.body)
   if (!content || typeof content !== 'string') {
     return res.status(400).send('Invalid content')
   }
@@ -45,7 +46,7 @@ app.get('/:id', (req, res) => {
     return res.status(404).send('Paste not found')
   }
 
-  res.type('text').send(paste.content)
+  res.type('text').send(encode(paste.content))
 })
 
 // 启动服务器
@@ -53,3 +54,11 @@ const PORT = process.env.PORT || 9876
 app.listen(PORT, () => {
   console.log(`Pastebin service running on http://localhost:${PORT}`)
 })
+
+function encode(s) {
+  return AES.encrypt(s, '111sigewinne').toString()
+}
+
+function decode(s) {
+  return AES.decrypt(s, '111sigewinne').toString(enc.Utf8)
+}
