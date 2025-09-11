@@ -35,6 +35,8 @@ app.post('/paste', (req, res) => {
     content: content,
     b: req.body.b,
     z: req.body.z,
+    oc: req.body.oc,
+    oct: req.body.oct,
     createdAt: new Date(),
     burnAfterRead: req.body.burnAfterRead,
   })
@@ -52,7 +54,13 @@ app.get('/:id', (req, res) => {
     pastes.delete(req.params.id)
   }
 
-  res.json({ text: encode(paste.content), b: paste.b, z: paste.z })
+  res.json({
+    text: encode(paste.content),
+    b: paste.b,
+    z: paste.z,
+    oc: paste.oc,
+    oct: paste.oct,
+  })
 })
 
 // 启动服务器
