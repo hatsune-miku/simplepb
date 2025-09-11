@@ -38,7 +38,6 @@ app.post('/paste', (req, res) => {
     oc: req.body.oc,
     oct: req.body.oct,
     createdAt: new Date(),
-    burnAfterRead: req.body.burnAfterRead,
   })
 
   res.send({ id })
@@ -50,7 +49,7 @@ app.get('/:id', (req, res) => {
   if (!paste) {
     return res.json({ text: '404 - 数据不存在' })
   }
-  if (paste.burnAfterRead) {
+  if (paste.b) {
     pastes.delete(req.params.id)
   }
 
