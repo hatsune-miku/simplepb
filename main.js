@@ -25,7 +25,7 @@ function generateId() {
 
 // 提交新粘贴
 app.post('/paste', (req, res) => {
-  const content = req.body.text // decode(req.body)
+  const content = req.body.t // decode(req.body)
   if (!content || typeof content !== 'string') {
     return res.status(400).send('Invalid content')
   }
@@ -33,6 +33,8 @@ app.post('/paste', (req, res) => {
   const id = generateId()
   pastes.set(id, {
     content: content,
+    b: req.body.b,
+    z: req.body.z,
     createdAt: new Date(),
     burnAfterRead: req.body.burnAfterRead,
   })
@@ -50,7 +52,7 @@ app.get('/:id', (req, res) => {
     pastes.delete(req.params.id)
   }
 
-  res.json({ text: encode(paste.content) })
+  res.json({ text: encode(paste.content), b: paste.b, z: paste.z })
 })
 
 // 启动服务器
