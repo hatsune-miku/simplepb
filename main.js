@@ -15,9 +15,15 @@ app.use((req, res, next) => {
 })
 
 // 中间件
-app.use(bodyParser.json())
+app.use(bodyParser.json({ limit: '50mb' }))
 app.use(express.static('public'))
-
+app.use(
+  bodyParser.urlencoded({
+    limit: '50mb',
+    extended: true,
+    parameterLimit: 50000,
+  })
+)
 // 生成随机ID
 function generateId() {
   return crypto.randomBytes(4).toString('hex')
