@@ -14,6 +14,16 @@ app.use((req, res, next) => {
   next()
 })
 
+// Middleware to log all requests
+app.use((req, res, next) => {
+  console.log(
+    `${new Date().toISOString()} - ${req.method} ${req.path} - User-Agent: ${
+      req.headers['user-agent']
+    }`
+  )
+  next()
+})
+
 // 中间件
 app.use(bodyParser.json({ limit: '50mb' }))
 app.use(express.static('public'))
