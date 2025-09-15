@@ -16,11 +16,10 @@ app.use((req, res, next) => {
 
 // Middleware to log all requests
 app.use((req, res, next) => {
-  console.log(
-    `${new Date().toISOString()} - ${req.method} ${req.path} - User-Agent: ${
-      req.headers['user-agent']
-    }`
-  )
+  if (req.headers['user-agent']?.includes('LarkUrl')) {
+    // stop next
+    return
+  }
   next()
 })
 
