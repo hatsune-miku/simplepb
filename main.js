@@ -87,7 +87,7 @@ app.get('/raw/:id', (req, res) => {
   }
 
   res.json({
-    data: paste.content,
+    data: decode(paste.content),
   })
 })
 
