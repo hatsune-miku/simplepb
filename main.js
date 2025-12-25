@@ -77,6 +77,20 @@ app.get('/:id', (req, res) => {
   })
 })
 
+app.get('/raw/:id', (req, res) => {
+  const paste = pastes.get(req.params.id)
+  if (!paste) {
+    return res.json({ text: '404 - 数据不存在' })
+  }
+  if (paste.b) {
+    pastes.delete(req.params.id)
+  }
+
+  res.json({
+    data: encode(paste.content),
+  })
+})
+
 // 启动服务器
 const PORT = process.env.PORT || 9876
 app.listen(PORT, () => {
